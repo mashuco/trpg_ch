@@ -23,6 +23,15 @@ services:
     depends_on:
       - frontend
 
+  api:
+     build:  ./django
+     expose:
+       - "8000"
+     volumes:
+       - ./app:/code
+     hostname: app-server
+     restart: always
+
   db:
     image: mysql:latest
     volumes:
@@ -34,3 +43,4 @@ services:
       - MYSQL_PASSWORD=user
     ports:
       - "3306:3306"
+
