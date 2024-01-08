@@ -5,7 +5,7 @@ services:
     container_name: frontend
     build: ./docker/frontend
     volumes:
-      - .:/app:cached
+      - ./react:/app:cached
     ports:
       - "5173:5173"
       - "24678:24678"
@@ -23,3 +23,14 @@ services:
     depends_on:
       - frontend
 
+  db:
+    image: mysql:latest
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_DATABASE=app
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+    ports:
+      - "3306:3306"
